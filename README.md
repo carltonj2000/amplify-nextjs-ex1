@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextJs And AWS Amplify From Scratch Example 1
 
-## Getting Started
+## Creation History
 
-First, run the development server:
+The code in this repository is based on the following.
+
+- [Create a Full Stack App with AWS Amplify Gen 2: End-to-End Type Safety and Serverless Backend](https://aws.amazon.com/awstv/watch/6be0b8fcebd/)
+
+## Code History
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx create-next-app@latest
+cd amplify-nextjs-ex1
+npm create amplify@latest
+aws sso login
+npx ampx sandbox # failed initially, did stuff below and it worked
+npx ampx sandbox delete
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I delete s3 ckd stuff while clean up and then needed the policy below to remove and reinstall
+in aws console -> iam identity Center -> permision sets -> amplify-policy added AWSCloudFormationFullAccess
+Delete CDKToolkit via https://console.aws.amazon.com/cloudformation/
+Ran the bootstrapped via https://us-west-1.console.aws.amazon.com/amplify/create/bootstraping
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install -g aws-cdk
+aws cloudformation delete-stack --stack-name CDKToolkit
+cdk bootstrap aws://{YOUR_ACCOUNT_ID}/{YOUR_REGION}
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Not sure I need the stuff below.
 
-## Learn More
+```bash
+npm i @aws-amplify/ui-react @aws-amplify/adapter-nextjs
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Progress
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Day     | Time    | Completed To      |
+| ------- | ------- | ----------------- |
+| 2/18/25 | 8:30 PM | 24 min 35 seconds |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes Or Errors Seen
